@@ -31,8 +31,15 @@ def p_ma_analytical(k, m):
     :param m: number of edges per iteration
     :return: probability of a node with degree k
     """
-    return (9 / (9 + 5 * m)) * np.exp(scipy.special.gammaln(5 * m / 6 + 5 / 2) - scipy.special.gammaln(5 * m / 6)) * \
-        np.exp(scipy.special.gammaln(k + m / 2) - scipy.special.gammaln(k + m / 2 + 5 / 2))
+    return (
+        (9 / (9 + 5 * m))
+        * np.exp(
+            scipy.special.gammaln(5 * m / 6 + 5 / 2) - scipy.special.gammaln(5 * m / 6)
+        )
+        * np.exp(
+            scipy.special.gammaln(k + m / 2) - scipy.special.gammaln(k + m / 2 + 5 / 2)
+        )
+    )
 
 
 def CDF_pa_analytical(k, m):
@@ -42,7 +49,7 @@ def CDF_pa_analytical(k, m):
     :param m: number of edges per iteration in the BA model
     :return: ECDF of a node with degree k
     """
-    return 1 - (m ** 2 + m) / ((k + 1) * (k + 2))
+    return 1 - (m**2 + m) / ((k + 1) * (k + 2))
 
 
 def CCDF_pa_analytical(k, m):
@@ -52,7 +59,7 @@ def CCDF_pa_analytical(k, m):
     :param m: number of edges per iteration in the BA model
     :return: ECDF of a node with degree k
     """
-    return (m ** 2 + m) / ((k + 1) * (k + 2))
+    return (m**2 + m) / ((k + 1) * (k + 2))
 
 
 def CCDF_powerlaw(x_min, x, alpha):
@@ -112,4 +119,4 @@ def D_threshold(alpha, m, n):
     :param m:
     :return:
     """
-    return np.sqrt(-np.log(alpha/2)*(1+(m/n))/(2*m))
+    return np.sqrt(-np.log(alpha / 2) * (1 + (m / n)) / (2 * m))
