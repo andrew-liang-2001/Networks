@@ -15,7 +15,7 @@
 import numpy as np
 
 
-def logbin(data, scale=1., zeros=False):
+def logbin(data, scale=1.0, zeros=False):
     """
     logbin(data, scale = 1., zeros = False)
 
@@ -63,7 +63,7 @@ def logbin(data, scale=1., zeros=False):
           count of 0 will not be returned.
     """
     if scale < 1:
-        raise ValueError('Function requires scale >= 1.')
+        raise ValueError("Function requires scale >= 1.")
     count = np.bincount(data)
     tot = np.sum(count)
     smax = np.max(data)
@@ -75,19 +75,21 @@ def logbin(data, scale=1., zeros=False):
         else:
             binedges = scale ** np.arange(1, jmax + 1)
             # count = count[1:]
-        binedges = np.unique(binedges.astype('uint64'))
+        binedges = np.unique(binedges.astype("uint64"))
         x = (binedges[:-1] * (binedges[1:] - 1)) ** 0.5
         y = np.zeros_like(x)
-        count = count.astype('float')
+        count = count.astype("float")
         for i in range(len(y)):
-            y[i] = np.sum(count[binedges[i]:binedges[i + 1]] / (binedges[i + 1] - binedges[i]))
+            y[i] = np.sum(
+                count[binedges[i] : binedges[i + 1]] / (binedges[i + 1] - binedges[i])
+            )
             # print(binedges[i],binedges[i+1])
         # print(smax,jmax,binedges,x)
         # print(x,y)
     else:
         x = np.nonzero(count)[0]
-        y = count[count != 0].astype('float')
-        if zeros != True and x[0] == 0:
+        y = count[count != 0].astype("float")
+        if not zeros and x[0] == 0:
             x = x[1:]
             y = y[1:]
     y /= tot

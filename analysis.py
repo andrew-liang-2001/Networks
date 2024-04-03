@@ -220,14 +220,14 @@ with open("data/243_1000repeats_m=2.pkl", "rb") as f:
 # %% 2.4.2 plot
 plt.errorbar(N_arr, result242, fmt=".", yerr=result242_std_dev/np.sqrt(1000), label="Empirical")
 N_dense = np.arange(1, max(N_arr), 1)
-plt.plot(N_dense, k1_ra_analytical(m=2, N=N_dense), "--", label="Analytical")
+plt.plot(N_dense, k1_ra_analytical(m=2, N=N_dense), "--", label="Theoretical")
 plt.xscale("log")
 plt.yscale("log")
 plt.xlabel("N")
 plt.ylabel("$k_1$")
 plt.legend()
 plt.tight_layout()
-# plt.savefig("plots/242.pdf", format="pdf")
+plt.savefig("plots/242.pdf", format="pdf")
 plt.show()
 
 # %%
